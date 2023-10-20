@@ -1,5 +1,6 @@
 # IMPORTS
 from wonderwords import RandomWord
+import wordle
 # MAIN
 # Introduction
 print('Welcome to Wordle! \n👋 Hello there! I\'m your Wordle companion. Before we dive into the word-guessing fun, may I know your name? Please type it below, and we\'ll get started:')
@@ -9,13 +10,12 @@ print(f'Great! Hi, {name}! It\'s nice to meet you. Now, let me explain how Wordl
 
 def start_new_game():
   print('START')
-  wordle = RandomWord().word(word_min_length=5, word_max_length=5)
-  print(f'The word was {wordle}')
-
+  wordle_word = RandomWord().word(word_min_length=5, word_max_length=5)
+  print(f'The word was {wordle_word}')
+  wordle.GameSession(wordle_word)
 
 def user_help():
   print('Help')
-
 
 def ask_if_player_is_ready():
   q = input(
@@ -29,9 +29,12 @@ def ask_if_player_is_ready():
     print('Oops! Please enter "YES" or "HELP".')
     ask_if_player_is_ready()
 
-
-ask_if_player_is_ready()
-
-
 def game_finished():
   pass
+
+# GAME SEQUENCE
+ask_if_player_is_ready()
+
+# word is sent to wordle.py class GameSession
+# tell user to make a guess
+
