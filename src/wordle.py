@@ -1,5 +1,9 @@
-# from enchant import enchant
-# d = enchant.Dict("en")
+from PyDictionary import PyDictionary
+dictionary=PyDictionary()
+
+print(bool(dictionary.meaning("indentation")))
+print(bool(dictionary.meaning("aware")))
+
 
 class GameSession():
   def __init__(self, wordle, session_guesses=[]):
@@ -17,11 +21,16 @@ class GameRound(GameSession):
     self.wordle = wordle
 
 # METHODS - what can players do in a game round
-  # 1. make a guess
-  def make_guess(self, word_guess):
-    pass
-
   # validate word_guess
-  # def validate_word_guess(self, word_guess):
-  #   self.word_guess = word_guess
-  #   if
+  def validate_word(word):
+    print(f'validating {word}...')
+    
+
+
+  # 1. make a guess
+  def make_guess(word_guess):
+    print('The user has guessed the word ' + word_guess)
+
+
+
+  # loop over guess word characters and check if it matches wordle_word characters

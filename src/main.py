@@ -32,9 +32,15 @@ def ask_if_player_is_ready():
 def game_finished():
   pass
 
-# GAME SEQUENCE
+# === GAME SEQUENCE ====
 ask_if_player_is_ready()
-
 # word is sent to wordle.py class GameSession
 # tell user to make a guess
+print('Please type a five-letter word to get started.')
+
+# user inputs a guess
+  # guess word is sent to wordle.py class GameRound
+guess = input(str('Guess 1/6: '))
+wordle.GameRound.validate_word(guess)
+  # it valdiates that the word is an english word and is 5 characters length
 
