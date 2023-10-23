@@ -3,25 +3,42 @@ dictionary = PyDictionary()
 
 
 class GameSession():
-  def __init__(self, wordle_word, ):
+  def __init__(self, wordle_word):
     self.wordle_word = wordle_word
-    print("GAMESESSION >>>>> wordle is : " + str(wordle_word))
 
-  # METHODS
-  # display user session guesses with colour indicators
+  def is_game_over(self):
+    False
 
 
-# a GameSession constitutes 6 game rounds where the player makes a guess each round
-class GameRound(GameSession):
+
+class GameRound():
   # def __init__(self, wordle):
   #   self.wordle = wordle
 
-  # validate word_guess
-  def check_dictionary(word):
-    print(f'checking: {word}...')
-    is_in_dictionary = bool(dictionary.meaning(word))
-    print(f'checking: {is_in_dictionary}')
-    return is_in_dictionary
+  def display_game_state():
+    # display how many attempts the player has made
+    # display previous player guesses
+    pass
+
+  def get_player_guess(self):
+    player_guess = input(str('Guess 1/6: '))
+
+    # check if word is 5 characters long
+    if len(player_guess) != 5:
+      print('Please enter a five-letter word!')
+      return self.get_player_word()
+  
+    # check if word is in the dictionary
+    is_in_dictionary = bool(dictionary.meaning(player_guess))
+    if not is_in_dictionary:
+      print(f'Could not find the word "{player_guess}" in the dictionary. Try again.')
+      return self.get_player_guess()
+    else:
+      print(f'"{player_guess}" is in the dictionary!')
+
+    return player_guess
+
+
 
   # make a guess
   def make_guess(word_guess):
