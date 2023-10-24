@@ -36,17 +36,15 @@ if __name__ == "__main__":
   ask_if_player_is_ready()
 
   # this while loop will run as long as game is not over
-  # while not game.is_game_over():
+  while not game.is_game_over():
+    # tell user to make a guess
+    print('Please type a five-letter word to get started.')
+    # user inputs a guess
+    player_guess = game_round.get_player_guess()
+    # give feedback to the user about their guess
+    feedback = game.make_guess(player_guess)
+    print(feedback)
 
-  # tell user to make a guess
-  print('Please type a five-letter word to get started.')
-
-  # user inputs a guess
-  player_guess = game_round.get_player_guess()
-
-  # give feedback to the user about their guess
-  feedback = game.make_guess(player_guess)
-  print(feedback)
 
   # TODO:
   # finish setting 'game over' state

@@ -46,7 +46,7 @@ class GameRound():
     # check if word is 5 characters long
     if len(player_guess) != 5:
       print('Please enter a five-letter word!')
-      return self.get_player_word()
+      return self.get_player_guess()
 
     # check if word is in the dictionary
     is_in_dictionary = bool(dictionary.meaning(player_guess))
