@@ -2,7 +2,7 @@ from PyDictionary import PyDictionary
 dictionary = PyDictionary()
 
 
-class GameSession():
+class GameSession():  # Manages the game state and logic
   def __init__(self, wordle_word):
     self.wordle_word = wordle_word
     self.guessed_words = []  # Initialize an empty list to store guessed words
@@ -16,12 +16,11 @@ class GameSession():
 
     if word_guess == self.wordle_word:
       return f'Congratulations! You have correctly guessed the word: {
-            word_guess}'
-      
+          word_guess}'
     else:
       self.attempts_left -= 1
       print(self.attempts_left)
-      return "Incorrect guess. Try again."
+      return "Incorrect guess. Try again." 
 
   def is_game_over(self):
     # if attempts left reaches 0
@@ -34,17 +33,19 @@ class GameSession():
     return False
 
 
-class GameRound():
-  # def __init__(self, wordle):
-  #   self.wordle = wordle
+class GameRound():  # Handles displaying information and taking input from the user.
+  def display_game_state(self, game):
+    # display previous guesses
+    if game.guessed_words:
+      print('Previous guesses:')
+      for word in game.guessed_words:
+        print(word)
 
-  def display_game_state():
-    # display how many attempts the player has made
-    # display previous player guesses
-    pass
+    # display attempts left
+    print(f"Guesses left: {game.attempts_left}")
 
   def get_player_guess(self):
-    player_guess = input(str('Guess 1/6: '))
+    player_guess = input(str('Enter word: ')).upper()
 
     # check if word is 5 characters long
     if len(player_guess) != 5:
@@ -59,5 +60,3 @@ class GameRound():
       return self.get_player_guess()
     else:
       return player_guess
-
-

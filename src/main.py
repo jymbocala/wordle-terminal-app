@@ -25,7 +25,7 @@ if __name__ == "__main__":
       print('Oops! Please enter "YES" or "HELP".')
       ask_if_player_is_ready()
 
-  wordle_word = RandomWord().word(word_min_length=5, word_max_length=5)
+  wordle_word = RandomWord().word(word_min_length=5, word_max_length=5).upper()
   print(f'Wordle_word: {wordle_word}')
 
   # Create an instance of the GameSession with the word set to wordle_word variable
@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
   # this while loop will run as long as game is not over
   while not game.is_game_over():
-    
+    game_round.display_game_state(game)
     # user inputs a guess
     player_guess = game_round.get_player_guess()
     # give feedback to the user about their guess
