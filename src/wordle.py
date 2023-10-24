@@ -5,22 +5,30 @@ dictionary = PyDictionary()
 class GameSession():
   def __init__(self, wordle_word):
     self.wordle_word = wordle_word
-    self.guessed_words = []  # Initialize an empty list to store guessed words.
-    self.attempts_left = 6 # Max number of attempts
+    self.guessed_words = []  # Initialize an empty list to store guessed words
+    self.attempts_left = 6  # Max number of attempts
 
   # make a guess
   def make_guess(self, word_guess):
-    print('The user has guessed the word ' + word_guess)
+    self.guessed_words.append(word_guess)
+    print('Current guessed_words: ' + self.guessed_words)
 
     if word_guess == self.wordle_word:
-      print(f'You guessed the correct word: {self.wordle_word}')
+      print(f'Congratulations! You have correctly guessed the word  {
+            word_guess}')
     else:
       self.attempts_left -= 1
+      print(f'Attempts left: {self.attempts_left}')
       return "Incorrect guess. Try again."
 
-
   def is_game_over(self):
-    False
+    # if attempts left reaches 0
+    if self.attempts_left <= 0:
+      return True
+    # if player guesses correctly
+    if self.wordle_word in self.guessed_words:
+      return True
+    return False
 
 
 class GameRound():
