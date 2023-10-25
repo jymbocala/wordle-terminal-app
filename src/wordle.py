@@ -1,5 +1,9 @@
 from PyDictionary import PyDictionary
+from rich import print
+from rich.console import Console
+from rich.padding import Padding
 dictionary = PyDictionary()
+console = Console(width=30)
 
 
 class GameSession():  # Manages the game state and logic
@@ -13,7 +17,7 @@ class GameSession():  # Manages the game state and logic
     # Clear the console or terminal screen
     import os
     os.system('clear' if os.name == 'posix' else 'cls')
-    
+
     self.guessed_words.append(word_guess)
     print('Current guessed_words: ')
     print(self.guessed_words)
@@ -26,7 +30,7 @@ class GameSession():  # Manages the game state and logic
       return 'That was your last attempt sorry :('
     else:
       self.attempts_left -= 1
-      return "Incorrect guess. Try again." 
+      return "Incorrect guess. Try again."
 
   def is_game_over(self):
     # if attempts left reaches 0
@@ -48,18 +52,22 @@ class GameRound():  # Handles displaying information and taking input from the u
     #     print(word)
 
     if game.guessed_words:
-      print('Previous guesses:')
       for i, guess in enumerate(game.guessed_words, start=1):
-          formatted_guess = ""
-          for wordle_char, guessed_char in zip(game.wordle_word, guess):
-              if guessed_char == wordle_char:
-                  formatted_guess += guessed_char.lower()
-              else:
-                  formatted_guess += guessed_char.upper()
-          print(f"Guess {i}: {formatted_guess}")
+        formatted_guess_text = ""
 
-    # display attempts left
-    print(f"Guesses left: {game.attempts_left}")
+        for wordle_char, guessed_char in zip(game.wordle_word, guess):
+          if guessed_char == wordle_char:
+            formatted_guess_text += f"[on green1]{guessed_char}[/] "
+          elif guessed_char in game.wordle_word:
+            formatted_guess_text += f"[on orange3]{guessed_char}[/] "
+          else:
+            formatted_guess_text += f"[on grey62]{guessed_char}[/] "
+
+        # Create a Padding object with the formatted text
+        formatted_guess_with_padding = Padding(formatted_guess_text, (0, 1), style="on blue", expand=False)
+
+        # Print the styled text with center alignment and padding
+        console.print(f"Guess {i}:", formatted_guess_with_padding, justify="center")
 
   def get_player_guess(self):
     player_guess = input(str('Enter word: ')).upper()
