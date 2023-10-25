@@ -10,6 +10,10 @@ class GameSession():  # Manages the game state and logic
 
   # make a guess
   def make_guess(self, word_guess):
+    # Clear the console or terminal screen
+    import os
+    os.system('clear' if os.name == 'posix' else 'cls')
+    
     self.guessed_words.append(word_guess)
     print('Current guessed_words: ')
     print(self.guessed_words)
@@ -17,9 +21,11 @@ class GameSession():  # Manages the game state and logic
     if word_guess == self.wordle_word:
       return f'Congratulations! You have correctly guessed the word: {
           word_guess}'
+    elif self.attempts_left == 1:
+      self.attempts_left -= 1
+      return 'That was your last attempt sorry :('
     else:
       self.attempts_left -= 1
-      print(self.attempts_left)
       return "Incorrect guess. Try again." 
 
   def is_game_over(self):
@@ -36,10 +42,21 @@ class GameSession():  # Manages the game state and logic
 class GameRound():  # Handles displaying information and taking input from the user.
   def display_game_state(self, game):
     # display previous guesses
+    # if game.guessed_words:
+    #   print('Previous guesses:')
+    #   for word in game.guessed_words:
+    #     print(word)
+
     if game.guessed_words:
       print('Previous guesses:')
-      for word in game.guessed_words:
-        print(word)
+      for i, guess in enumerate(game.guessed_words, start=1):
+          formatted_guess = ""
+          for wordle_char, guessed_char in zip(game.wordle_word, guess):
+              if guessed_char == wordle_char:
+                  formatted_guess += guessed_char.lower()
+              else:
+                  formatted_guess += guessed_char.upper()
+          print(f"Guess {i}: {formatted_guess}")
 
     # display attempts left
     print(f"Guesses left: {game.attempts_left}")
