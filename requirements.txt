@@ -6,8 +6,12 @@ click==8.1.7
 futures==3.0.5
 goslate==1.5.4
 idna==3.4
+markdown-it-py==3.0.0
+mdurl==0.1.2
 PyDictionary==2.0.1
+Pygments==2.16.1
 requests==2.31.0
+rich==13.6.0
 soupsieve==2.5
 urllib3==2.0.7
 wonderwords==2.2.0
