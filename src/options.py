@@ -1,5 +1,8 @@
 import os
 from wonderwords import RandomWord
+from rich import print
+from rich.console import Console
+console = Console(width=65)
 
 
 class Options:
@@ -9,12 +12,12 @@ class Options:
   def display_options(self):
     os.system('clear' if os.name == 'posix' else 'cls')
     while True:
-      print("OPTIONS MENU")
+      print("\n[bold cyan]OPTIONS MENU[/bold cyan]\n\n")
       print("Available commands:")
-      print("1. Adjust word length from 3-7 to increase or decrease difficulty, default is set to 5 (e.g., 'length4')")
-      print("2. Start the game with updated settings (type 'start' or 's')")
+      print("1. [bold magenta]length<number>[/] - Adjust word length between 3-7 to increase or decrease difficulty, default is set to 5 (e.g., 'length4')")
+      print("2. [bold magenta]start[/] or [bold magenta]s[/] - Start the game with updated settings")
 
-      choice = input("Type a command to change the setting: ")
+      choice = input("\nType a command to change the setting: ")
 
       if choice.startswith("length"):
         try:
@@ -23,20 +26,21 @@ class Options:
             # Adjust the word length
             self.set_word_length(length)
             os.system('clear' if os.name == 'posix' else 'cls')
-            print(f"Word length set to {length}.\n\n\n")
+            print(f"[green4]Word length set to {length}[/green4].\n")
           else:
             os.system('clear' if os.name == 'posix' else 'cls')
-            print("Invalid word length. Please enter a number between 3 and 7.")
+            print(
+              "[bold red]Invalid word length.[/bold red] Please enter a number between 3 and 7.")
         except ValueError:
           os.system('clear' if os.name == 'posix' else 'cls')
-          print(
-            "Invalid command format. Use 'length' followed by a number (e.g., 'length5').")
+          print("[bold red]Invalid command format.[/bold red] Use '[bold]length[/bold]' followed by a number (e.g., '[bold]length5[/bold]').")
 
       elif choice.lower() == "start" or choice.lower() == "s":
         return True  # Settings were adjusted, and the game should start
 
       else:
-        print("Invalid command. Please choose a valid command from the list.")
+        print(
+          "[bold red]Invalid command.[/bold red] Please choose a valid command from the list.")
 
   def set_word_length(self, length):
     self.word_length = length
