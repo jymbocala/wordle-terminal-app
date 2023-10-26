@@ -32,15 +32,22 @@ class GameSession():  # Manages the game state and logic
       """
     elif self.attempts_left == 1:
       self.attempts_left -= 1
-      return 'That was your last attempt sorry :('
+      return '''
+ __   __  __    _  ___      __   __  _______  ___   _  __   __      ___    ____  
+|  | |  ||  |  | ||   |    |  | |  ||       ||   | | ||  | |  |    |   |  |    | 
+|  | |  ||   |_| ||   |    |  | |  ||       ||   |_| ||  |_|  |    |___| |    _| 
+|  |_|  ||       ||   |    |  |_|  ||       ||      _||       |     ___  |   |   
+|       ||  _    ||   |___ |       ||      _||     |_ |_     _|    |   | |   |   
+|       || | |   ||       ||       ||     |_ |    _  |  |   |      |___| |   |_  
+|_______||_|  |__||_______||_______||_______||___| |_|  |___|             |____| 
+      '''
     else:
       self.attempts_left -= 1
-      return "Incorrect guess. Try again."
+      return '[center]Incorrect guess. Try again.\n\n[/center]'
 
   def is_game_over(self):
     # if attempts left reaches 0
     if self.attempts_left <= 0:
-      print('Oh no! You have ran out of guesses :(')
       return True
     # if player guesses correctly
     if self.wordle_word in self.guessed_words:
@@ -122,6 +129,6 @@ class GameRound:  # Handles displaying information and taking input from the use
 
     # Check if it's a win or a loss
     if is_win:
-      print(f'\n\nCongratulations! You correctly guessed the word: {game.wordle_word}!\n\n')
+      print(f'\n\nCongratulations! You correctly guessed the word: [bold magenta]{self.wordle_word}[/]!\n\n\n\n')
     else:
-      print("Oh no! You've run out of guesses. The word was:", self.wordle_word)
+      print(f'\n\nOh no! You\'ve run out of guesses. The word was [bold magenta]{self.wordle_word}[/]!\n\n\n\n')
