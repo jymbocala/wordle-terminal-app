@@ -1,13 +1,36 @@
 # IMPORTS
+import os
 from wonderwords import RandomWord
 import wordle
+from rich import print
+from rich.console import Console
+console = Console(width=65)
 
 # MAIN
 if __name__ == "__main__":
+  os.system('clear' if os.name == 'posix' else 'cls')
   # Introduction
-  print('Welcome to Wordle! \n👋 Hello there! I\'m your Wordle companion. Before we dive into the word-guessing fun, may I know your name? Please type it below, and we\'ll get started:')
-  name = input(str('Enter your name:  '))
-  print(f'Great! Hi, {name}! It\'s nice to meet you. Now, let me explain how Wordle works. \n🧩 Wordle is a word-guessing game where you\'ll need to guess a secret five-letter word. You have six attempts to guess the word correctly. After each guess, I\'ll provide feedback to help you narrow down the possibilities. Each letter in the word will be color-coded to let you know if it\'s in the word, and if it\'s in the right position. Your goal is to crack the code as quickly as possible! \nTo make a guess, simply type a five-letter word, and I\'ll let you know how you\'re doing.')
+  print('''
+ _     _  _______  ___      _______  _______  __   __  _______    _______  _______    _     _  _______  ______    ______   ___      _______  __  
+| | _ | ||       ||   |    |       ||       ||  |_|  ||       |  |       ||       |  | | _ | ||       ||    _ |  |      | |   |    |       ||  | 
+| || || ||    ___||   |    |       ||   _   ||       ||    ___|  |_     _||   _   |  | || || ||   _   ||   | ||  |  _    ||   |    |    ___||  | 
+|       ||   |___ |   |    |       ||  | |  ||       ||   |___     |   |  |  | |  |  |       ||  | |  ||   |_||_ | | |   ||   |    |   |___ |  | 
+|       ||    ___||   |___ |      _||  |_|  ||       ||    ___|    |   |  |  |_|  |  |       ||  |_|  ||    __  || |_|   ||   |___ |    ___||__| 
+|   _   ||   |___ |       ||     |_ |       || ||_|| ||   |___     |   |  |       |  |   _   ||       ||   |  | ||       ||       ||   |___  __  
+|__| |__||_______||_______||_______||_______||_|   |_||_______|    |___|  |_______|  |__| |__||_______||___|  |_||______| |_______||_______||__| 
+  ''')
+  print('\n\n👋 Hello there! I\'m your Wordle companion. Before we dive into the word-guessing fun, may I know your name? Please type it below, and we\'ll get started:')
+  name = input(str('\n\n\nEnter your name:  '))
+
+  os.system('clear' if os.name == 'posix' else 'cls')
+
+  console.print(f'Great! 👋Hi, {name}!')
+  console.print("🧩 Wordle is a word-guessing game. Try to guess a secret [bold cyan]five-letter word[/] in [bold magenta]six attempts[/].")
+  console.print("After each guess, I'll provide feedback using color indicators:")
+  console.print("1. [bold green]Green[/] means the letter is correct and in the right position.")
+  console.print("2. [bold orange3]Orange[/] means the letter is correct but in the wrong position.")
+  console.print("3. [bold grey62]Grey[/] means the letter is not in the word.")
+  console.print("Your goal is to guess the word as quickly as possible.\n\n\n")
 
 
   # Initiate a new random 5-letter word
@@ -15,10 +38,10 @@ if __name__ == "__main__":
   print(f'Wordle_word: {wordle_word}')
   # Create an instance of the GameSession with the word set to wordle_word variable
   game = wordle.GameSession(wordle_word)
-  game_round = wordle.GameRound()
+  game_round = wordle.GameRound(wordle_word, game)
 
   # === GAME SEQUENCE ====
-  print('Please type a five-letter word to get started.')
+  print('Please type a five-letter word to make your first guess.')
 
   # this while loop will run as long as game is not over
   while not game.is_game_over():
@@ -28,6 +51,8 @@ if __name__ == "__main__":
     # give feedback to the user about their guess
     feedback = game.make_guess(player_guess)
     print(feedback)
+
+  game_round.display_outcome(game)
 
   
 

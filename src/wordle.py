@@ -1,9 +1,8 @@
 from PyDictionary import PyDictionary
 from rich import print
 from rich.console import Console
-from rich.padding import Padding
 dictionary = PyDictionary()
-console = Console(width=30)
+console = Console(width=65)
 
 
 class GameSession():  # Manages the game state and logic
@@ -22,8 +21,15 @@ class GameSession():  # Manages the game state and logic
     self.guessed_words.append(word_guess)
 
     if word_guess == self.wordle_word:
-      return f'Congratulations! You have correctly guessed the word: {
-          word_guess}'
+      return """
+       __   __  _______  __   __    _     _  _______  __    _  __  
+      |  | |  ||       ||  | |  |  | | _ | ||       ||  |  | ||  | 
+      |  |_|  ||   _   ||  | |  |  | || || ||   _   ||   |_| ||  | 
+      |       ||  | |  ||  |_|  |  |       ||  | |  ||       ||  | 
+      |_     _||  |_|  ||       |  |       ||  |_|  ||  _    ||__| 
+        |   |  |       ||       |  |   _   ||       || | |   | __  
+        |___|  |_______||_______|  |__| |__||_______||_|  |__||__| 
+      """
     elif self.attempts_left == 1:
       self.attempts_left -= 1
       return 'That was your last attempt sorry :('
@@ -40,11 +46,17 @@ class GameSession():  # Manages the game state and logic
     if self.wordle_word in self.guessed_words:
       return True
     return False
-  
+
   def is_game_won(self):
     return self.wordle_word in self.guessed_words
 
-class GameRound():  # Handles displaying information and taking input from the user.
+
+class GameRound:  # Handles displaying information and taking input from the user.
+  def __init__(self, wordle_word, game_session):
+    self.wordle_word = wordle_word
+    self.guesses = []
+    self.game_session = game_session  # Store a reference to the GameSession instance
+
   def display_game_state(self, game):
     if game.guessed_words:
       for i, guess in enumerate(game.guessed_words, start=1):
@@ -83,13 +95,33 @@ class GameRound():  # Handles displaying information and taking input from the u
     else:
       return player_guess
 
-  def display_outcome(self, is_win):
-      # Display all 6 guesses to the user
-    for i, guess in enumerate(self.guesses, start=1):
-      print(f"Guess {i}: {guess}")
+  def display_guesses(self, guessed_words):
+    for i, guess in enumerate(guessed_words, start=1):
+      formatted_guess_text = []
+
+      for wordle_char, guessed_char in zip(self.wordle_word, guess):
+        if guessed_char == wordle_char:
+          formatted_guess_text.append(f"[bold green]{guessed_char}[/]")
+        elif guessed_char in self.wordle_word:
+          formatted_guess_text.append(f"[bold orange3]{guessed_char}[/]")
+        else:
+          formatted_guess_text.append(f"[bold grey62]{guessed_char}[/]")
+
+      # Join the colored characters with spaces
+      formatted_guess_text = " ".join(formatted_guess_text)
+
+      # Print the styled text with center alignment
+      console.print(formatted_guess_text, justify="center")
+
+  def display_outcome(self, game):
+    # Display all 6 guesses to the user
+    self.display_guesses(game.guessed_words)
+
+    # Determine if the game is won using the is_game_won method from GameSession
+    is_win = self.game_session.is_game_won()
 
     # Check if it's a win or a loss
     if is_win:
-      print("Congratulations! You've won!")
+      print(f'\n\nCongratulations! You correctly guessed the word: {game.wordle_word}!\n\n')
     else:
       print("Oh no! You've run out of guesses. The word was:", self.wordle_word)
