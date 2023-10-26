@@ -1,9 +1,10 @@
 # IMPORTS
 import os
 from wonderwords import RandomWord
-import wordle
 from rich import print
 from rich.console import Console
+import wordle
+from options import Options
 
 console = Console(width=65)
 
@@ -24,40 +25,43 @@ def display_introduction(name):
   console.print("Your goal is to guess the word as quickly as possible.\n\n\n")
 
 
+# Create an Options instance
+settings = Options()
+
 # function to display the options menu
-def options_menu(wordle_word):
-  # clear the terminal diplay the options menu neater
-  os.system('clear' if os.name == 'posix' else 'cls')
+# def options_menu(wordle_word):
+#   # clear the terminal diplay the options menu neater
+#   os.system('clear' if os.name == 'posix' else 'cls')
 
-  while True:
-    # Display available commands and ask for player input
-    print("Available commands:")
-    print("1. Adjust word length (e.g., 'length5')")
-    print("2. Exit options menu with adjusted settings (type 'exit' or 'x')")
+#   while True:
+#     # Display available commands and ask for player input
+#     print("Available commands:")
+#     print("1. Adjust word length (e.g., 'length5')")
+#     print("2. Exit options menu with adjusted settings (type 'exit' or 'x')")
 
-    choice = input("Type a command to change the setting: ")
+#     choice = input("Type a command to change the setting: ")
 
-    if choice.startswith("length"):
-      # Parse the length from the command and adjust the game settings
-      try:
-        length = int(choice[6:])
-        if 3 <= length <= 7:
-          # Adjust the game settings with the new word length
-          wordle_word = RandomWord().word(word_min_length=length, word_max_length=length).upper()
-          print(f"Word length set to {length}.")
-          return True  # Indicate that settings were successfully adjusted
-        else:
-          print("Invalid word length. Please enter a number between 3 and 7.")
-      except ValueError:
-        print(
-          "Invalid command format. Use 'length' followed by a number (e.g., 'length5').")
+#     if choice.startswith("length"):
+#       # Parse the length from the command and adjust the game settings
+#       try:
+#         length = int(choice[6:])
+#         if 3 <= length <= 7:
+#           # Adjust the game settings with the new word length
+#           wordle_word = RandomWord().word(word_min_length=length, word_max_length=length).upper()
+#           print(f"Word length set to {length}.")
+#           return True  # Indicate that settings were successfully adjusted
+#         else:
+#           print("Invalid word length. Please enter a number between 3 and 7.")
+#       except ValueError:
+#         print(
+#           "Invalid command format. Use 'length' followed by a number (e.g., 'length5').")
 
-    elif choice.lower() == "exit" or choice.lower() == "x":
-      print("Exiting the options menu.")
-      break  # Exit the options menu loop
+#     elif choice.lower() == "exit" or choice.lower() == "x":
+#       print("Exiting the options menu.")
+#       break  # Exit the options menu loop
 
-    else:
-      print("Invalid command. Please choose a valid command from the list.")
+#     else:
+#       print("Invalid command. Please choose a valid command from the list.")
 
 
 # MAIN
@@ -78,10 +82,7 @@ if __name__ == "__main__":
   print('\n\n👋 Hello there! I\'m your Wordle companion. Before we dive into the word-guessing fun, may I know your name? Please type it below, and we\'ll get started:')
   name = input(str('\n\n\nEnter your name:  '))
 
-  wordle_word = RandomWord().word(word_min_length=5, word_max_length=5).upper()
   display_introduction(name)
-
-  settings_adjusted = False  # Initialize the settings_adjusted variable
 
   while True:
     # Prompt the player for the game options
@@ -90,22 +91,41 @@ if __name__ == "__main__":
     choice = input()
 
     if choice == 'O' or choice == 'o':
-      settings_adjusted = options_menu(wordle_word)
-      if settings_adjusted:
-        break  # Exit the options menu loop if settings were adjusted
+      # Use the Options class to adjust word length
+      settings.display_options()
+      # Generate wordle_word based on word_length setting
+      wordle_word = settings.generate_wordle_word()
+      print(f'Wordle_word: {wordle_word}')
+      # Create an instance of the GameSession with the word set to wordle_word variable
+      game = wordle.GameSession(wordle_word)
+      game_round = wordle.GameRound(wordle_word, game, settings)
+
+      # === GAME ====
+      print(f'Please type a {settings.word_length}-letter word to make your first guess.')
+
+      # this while loop will run as long as game is not over
+      while not game.is_game_over():
+        game_round.display_game_state(game)  # displays progression of the game
+        # user inputs a guess
+        player_guess = game_round.get_player_guess()
+        # give feedback to the user about their guess
+        feedback = game.make_guess(player_guess)
+        print(feedback)
+
+      game_round.display_outcome(game)
+      break  # this break will exit the main loop
 
     # If the player hasn't adjusted the settings, allow them to start the game
     elif choice == 'S' or choice == 's':
-      if not settings_adjusted:
-        # Create a random word with default length
-        # wordle_word = RandomWord().word(word_min_length=5, word_max_length=5).upper()
-        print(f'Wordle_word: {wordle_word}')
+      # Generate wordle_word based on word_length setting
+      wordle_word = settings.generate_wordle_word()
+      print(f'Wordle_word: {wordle_word}')
       # Create an instance of the GameSession with the word set to wordle_word variable
       game = wordle.GameSession(wordle_word)
-      game_round = wordle.GameRound(wordle_word, game)
+      game_round = wordle.GameRound(wordle_word, game, settings)
 
-      # === GAME SEQUENCE ====
-      print('Please type a five-letter word to make your first guess.')
+      # === GAME ====
+      print(f'Please type a {settings.word_length}-letter word to make your first guess.')
 
       # this while loop will run as long as game is not over
       while not game.is_game_over():
@@ -122,4 +142,5 @@ if __name__ == "__main__":
     else:
       print('Invalid choice. Please type [bold]start[/] or [bold]options[/].')
 
-    # === END GAME OPTIONS ====
+  # === END GAME OPTIONS ====
+  print('end game options')

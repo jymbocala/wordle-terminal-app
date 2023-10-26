@@ -1,9 +1,12 @@
 from PyDictionary import PyDictionary
 from rich import print
 from rich.console import Console
+from options import Options
 dictionary = PyDictionary()
 console = Console(width=65)
 
+# Create an Options instance
+settings = Options()
 
 class GameSession():  # Manages the game state and logic
   def __init__(self, wordle_word):
@@ -59,10 +62,12 @@ class GameSession():  # Manages the game state and logic
 
 
 class GameRound:  # Handles displaying information and taking input from the user.
-  def __init__(self, wordle_word, game_session):
+  def __init__(self, wordle_word, game_session, settings):
     self.wordle_word = wordle_word
     self.guesses = []
     self.game_session = game_session  # Store a reference to the GameSession instance
+    self.settings = settings
+
 
   def display_game_state(self, game):
     if game.guessed_words:
@@ -88,9 +93,9 @@ class GameRound:  # Handles displaying information and taking input from the use
   def get_player_guess(self):
     player_guess = input(str('Enter word: ')).upper()
 
-    # check if word is 5 characters long
-    if len(player_guess) != 5:
-      print('Please enter a five-letter word!')
+    # check if the word is the correct length
+    if len(player_guess) != self.settings.word_length:
+      print(f'Please enter a {self.settings.word_length}-letter word!')
       return self.get_player_guess()
 
     # check if word is in the dictionary
