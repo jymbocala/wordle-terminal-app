@@ -13,24 +13,27 @@ def display_introduction(name) -> None:
     console.print(f'Great! 👋Hi, {name}!\n\n')
     console.print(
         '🧩 Wordle is a word-guessing game.'
-        'Try to guess a secret [bold cyan]five-letter word[/] in [bold magenta]six attempts[/].')
+        'Try to guess a secret [bold cyan]five-letter word[/]'
+        ' in [bold magenta]six attempts[/].')
     console.print(
-        "After each guess, I'll provide feedback using color indicators:")
+        'After each guess, I\'ll provide feedback using color indicators:')
     console.print(
-        "1. [bold green]Green[/] means the letter is correct and in the right position.")
+        '1. [bold green]Green[/] '
+        'means the letter is correct and in the right position.')
     console.print(
-        "2. [bold orange3]Orange[/] means the letter is correct but in the wrong position.")
+        '2. [bold orange3]Orange[/] '
+        'means the letter is correct but in the wrong position.')
     console.print(
-        "3. [bold grey62]Grey[/] means the letter is not in the word.")
+        '3. [bold grey62]Grey[/] means the letter is not in the word.')
     console.print(
-        "Your goal is to guess the word as quickly as possible.\n\n\n")
+        'Your goal is to guess the word as quickly as possible.\n\n\n')
 
 
 # Create an Options instance
 settings = Options()
 
 # MAIN
-if __name__ == "__main__":
+if __name__ == '__main__':
     os.system('clear' if os.name == 'posix' else 'cls')
 
     # welcome banner

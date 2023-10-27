@@ -12,7 +12,8 @@ settings = Options()
 class GameSession():  # Manages the game state and logic
     def __init__(self, wordle_word):
         self.wordle_word = wordle_word
-        self.guessed_words = []  # Initialize an empty list to store guessed words
+        # Initialize an empty list to store guessed words
+        self.guessed_words = []
         self.attempts_left = 6  # Max number of attempts
 
     # make a guess
@@ -26,24 +27,24 @@ class GameSession():  # Manages the game state and logic
 
         if word_guess == self.wordle_word:
             return """
-       __   __  _______  __   __    _     _  _______  __    _  __  
-      |  | |  ||       ||  | |  |  | | _ | ||       ||  |  | ||  | 
-      |  |_|  ||   _   ||  | |  |  | || || ||   _   ||   |_| ||  | 
-      |       ||  | |  ||  |_|  |  |       ||  | |  ||       ||  | 
-      |_     _||  |_|  ||       |  |       ||  |_|  ||  _    ||__| 
-        |   |  |       ||       |  |   _   ||       || | |   | __  
-        |___|  |_______||_______|  |__| |__||_______||_|  |__||__| 
+       __   __  _______  __   __    _     _  _______  __    _  __
+      |  | |  ||       ||  | |  |  | | _ | ||       ||  |  | ||  |
+      |  |_|  ||   _   ||  | |  |  | || || ||   _   ||   |_| ||  |
+      |       ||  | |  ||  |_|  |  |       ||  | |  ||       ||  |
+      |_     _||  |_|  ||       |  |       ||  |_|  ||  _    ||__|
+        |   |  |       ||       |  |   _   ||       || | |   | __
+        |___|  |_______||_______|  |__| |__||_______||_|  |__||__|
       """
         elif self.attempts_left == 1:
             self.attempts_left -= 1
             return '''
- __   __  __    _  ___      __   __  _______  ___   _  __   __      ___    ____  
-|  | |  ||  |  | ||   |    |  | |  ||       ||   | | ||  | |  |    |   |  |    | 
-|  | |  ||   |_| ||   |    |  | |  ||       ||   |_| ||  |_|  |    |___| |    _| 
-|  |_|  ||       ||   |    |  |_|  ||       ||      _||       |     ___  |   |   
-|       ||  _    ||   |___ |       ||      _||     |_ |_     _|    |   | |   |   
-|       || | |   ||       ||       ||     |_ |    _  |  |   |      |___| |   |_  
-|_______||_|  |__||_______||_______||_______||___| |_|  |___|             |____| 
+ __   __  __    _  ___      __   __  _______  ___   _  __   __      ___    ____
+|  | |  ||  |  | ||   |    |  | |  ||       ||   | | ||  | |  |    |   |  |    |
+|  | |  ||   |_| ||   |    |  | |  ||       ||   |_| ||  |_|  |    |___| |    _|
+|  |_|  ||       ||   |    |  |_|  ||       ||      _||       |     ___  |   |
+|       ||  _    ||   |___ |       ||      _||     |_ |_     _|    |   | |   |
+|       || | |   ||       ||       ||     |_ |    _  |  |   |      |___| |   |_
+|_______||_|  |__||_______||_______||_______||___| |_|  |___|             |____|
       '''
         else:
             self.attempts_left -= 1
@@ -62,11 +63,12 @@ class GameSession():  # Manages the game state and logic
         return self.wordle_word in self.guessed_words
 
 
-class GameRound:  # Handles displaying information and taking input from the user.
+class GameRound:  # Handles displaying information and taking input from user.
     def __init__(self, wordle_word, game_session, settings):
         self.wordle_word = wordle_word
         self.guesses = []
-        self.game_session = game_session  # Store a reference to the GameSession instance
+        # Store a reference to the GameSession instance
+        self.game_session = game_session
         self.settings = settings
 
     def display_game_state(self, game):
@@ -133,13 +135,15 @@ class GameRound:  # Handles displaying information and taking input from the use
         # Display all 6 guesses to the user
         self.display_guesses(game.guessed_words)
 
-        # Determine if the game is won using the is_game_won method from GameSession
+        # Determine if the game is won using the is_game_won
         is_win = self.game_session.is_game_won()
 
         # Check if it's a win or a loss
         if is_win:
-            print(f'\n\nCongratulations! You correctly guessed the word: [bold magenta]{
-                  self.wordle_word}[/]!\n\n\n\n')
+            print('\n\nCongratulations! '
+                  f'You correctly guessed the word: [bold magenta]{
+                      self.wordle_word}[/]!\n\n\n\n')
         else:
-            print(f'\n\nOh no! You\'ve run out of guesses. The word was [bold magenta]{
-                  self.wordle_word}[/]!\n\n\n\n')
+            print('\n\nOh no! You\'ve run out of guesses. '
+                  f'The word was [bold magenta]{
+                      self.wordle_word}[/]!\n\n\n\n')

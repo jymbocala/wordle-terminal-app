@@ -15,7 +15,8 @@ class Options:
             print('\n[bold cyan]OPTIONS MENU[/bold cyan]\n\n')
             print('Available commands:')
             print('1. [bold magenta]length<number>[/]'
-                  ' - Adjust word length between 3-7 to increase or decrease difficulty, '
+                  ' - Adjust word length between 3-7 '
+                  'to increase or decrease difficulty, '
                   'default is set to 5 (e.g., "length4")')
             print(
                 '2. [bold magenta]start[/] or [bold magenta]s[/]'
@@ -45,7 +46,7 @@ class Options:
                         '(e.g., "[bold]length5[/bold]").')
 
             elif choice.lower() == 'start' or choice.lower() == 's':
-                return True  # Settings were adjusted, and the game should start
+                return True  # Settings were adjusted, start game
 
             else:
                 print(
