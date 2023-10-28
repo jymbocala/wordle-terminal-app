@@ -1,8 +1,35 @@
 # Wordle by Jym 
 
+## Software and Hardware Requirements
+
+### Software Requirements
+
+- **Operating System**: Wordle is designed to run on various operating systems, including Windows, macOS, and Linux.
+
+- **Python 3 or Higher**: Wordle is built using Python, so make sure you have Python 3 or a higher version installed on your system. You can check your Python version by running `python3 --version`. If you don't have Python installed, you can download it from the [official Python website](https://www.python.org/downloads/).
+
+- **pip (Python Package Manager)**: Ensure that pip is available in your Python installation. pip is a package manager for Python and is usually included with Python. You can check if pip is installed by running `pip --version`.
+
+
+### Hardware Requirements
+
+- **CPU**: Wordle is a text-based game and does not require significant CPU resources. Any modern computer or laptop should be sufficient.
+
+- **Memory (RAM)**: A minimum of 2GB of RAM is recommended to run Wordle smoothly.
+
+- **Disk Space**: Wordle has minimal disk space requirements. You'll need less than 100MB of free storage space to download and install the game.
+
+- **Display**: Wordle's text-based interface is compatible with various screen sizes and resolutions.
+
+- **Input**: You'll need a standard keyboard for typing your guesses during the game.
+
+- **Internet Connection**: An internet connection is required for downloading Wordle and its dependencies. Once downloaded, the game can be played offline.
+
+Please note that the specific requirements may vary based on your operating system and the configurations of your computer.
+
 ******
 
-### Installation and Gameplay
+## Installation and Gameplay
 1. **Check Python Install Status**: Wordle requires Python 3 or higher to run.
 
     To check if Python is installed and verify its current version, open a new terminal window and enter the following command:
@@ -49,7 +76,7 @@ Have fun playing Wordle!
 
 ******
 
-### Required Dependencies:
+## Required Dependencies:
 ```
 astroid==3.0.1
 beautifulsoup4==4.12.2
@@ -78,3 +105,5 @@ tomlkit==0.12.1
 urllib3==2.0.7
 wonderwords==2.2.0
 ```
+
+## References:
