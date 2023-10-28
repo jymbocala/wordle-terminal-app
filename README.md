@@ -1,5 +1,7 @@
 # Wordle by Jym 
 
+******
+
 ### Installation and Gameplay
 1. **Check Python Install Status**: Wordle requires Python 3 or higher to run.
 
@@ -44,3 +46,35 @@
     - Try to guess the word within six attempts to win!
 
 Have fun playing Wordle!
+
+******
+
+### Required Dependencies:
+```
+astroid==3.0.1
+beautifulsoup4==4.12.2
+bs4==0.0.1
+certifi==2023.7.22
+charset-normalizer==3.3.0
+click==8.1.7
+dill==0.3.7
+futures==3.0.5
+goslate==1.5.4
+idna==3.4
+isort==5.12.0
+markdown-it-py==3.0.0
+mccabe==0.7.0
+mdurl==0.1.2
+pep8==1.7.1
+platformdirs==3.11.0
+pycodestyle==2.11.1
+PyDictionary==2.0.1
+Pygments==2.16.1
+pylint==3.0.2
+requests==2.31.0
+rich==13.6.0
+soupsieve==2.5
+tomlkit==0.12.1
+urllib3==2.0.7
+wonderwords==2.2.0
+```
