@@ -98,6 +98,7 @@ def end_game_options(settings):
             print('Thanks for playing Wordle 🫶. Goodbye!\n')
             sys.exit()
         else:
+            clear_screen()
             print('[bold red]Invalid command.[/bold red] '
                 'Please choose a valid option (s, o, or x).\n')
 

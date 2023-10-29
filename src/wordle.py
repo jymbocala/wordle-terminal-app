@@ -1,3 +1,4 @@
+import os
 from PyDictionary import PyDictionary
 from rich import print
 from rich.console import Console
@@ -19,7 +20,6 @@ class GameSession():  # Manages the game state and logic
     # make a guess
     def make_guess(self, word_guess):
         # Clear the console or terminal screen
-        import os
         os.system('clear' if os.name == 'posix' else 'cls')
 
         # add player guess to guessed_word list
@@ -106,7 +106,11 @@ class GameRound:  # Handles game state presentation and interaction.
             return self.get_player_guess()
 
         # check if word is in the dictionary
-        is_in_dictionary = bool(dictionary.meaning(player_guess))
+        try:
+            is_in_dictionary = bool(dictionary.meaning(player_guess, disable_errors=True))
+        except Exception:
+            is_in_dictionary = False
+
         if not is_in_dictionary:
             print(f'Could not find the word {player_guess} '
             'in the dictionary. Try again.')
@@ -175,3 +179,6 @@ class GameRound:  # Handles game state presentation and interaction.
             print('\n\nOh no! You\'ve run out of guesses. '
                 f'The word was [bold magenta]{
                     self.wordle_word}[/]!\n\n\n\n')
+            
+    def clear_screen(self):
+        os.system('clear' if os.name == 'posix' else 'cls')
