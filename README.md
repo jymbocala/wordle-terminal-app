@@ -1,5 +1,26 @@
 # Wordle by Jym 
 
+## Code Style Guide
+
+This project follows the Python Enhancement Proposal 8 (PEP8) style guide to ensure clean and consistent code formatting. PEP8 is the de facto standard for Python code style, and it helps maintain code readability and consistency across Python projects. You can find the full PEP8 style guide [here](https://peps.python.org/pep-0008/).
+
+Here's an example of PEP8-compliant code style in Wrodle Terminal App:
+
+```
+class GameSession():  # Manages the game state and logic
+    def __init__(self, wordle_word):
+        self.wordle_word = wordle_word
+        # Initialize an empty list to store guessed words
+        self.guessed_words = []
+        self.attempts_left = 6  # Max number of attempts
+```
+
+This code snippet demonstrates several PEP8-compliant practices, including:
+✅ Indentation: Each level of indentation is four spaces.
+✅ Line Length: Lines are kept within a reasonable length to ensure readability.
+✅ Spacing: Proper spacing is used around operators and within comments for clarity.
+
+
 ## Software and Hardware Requirements
 
 ### Software Requirements
