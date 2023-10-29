@@ -1,17 +1,19 @@
 # IMPORTS
 import os
-# from wonderwords import RandomWord
+import sys
 from rich import print
 from rich.console import Console
 import wordle
 from options import Options
 
 console = Console(width=65)
+# Create an Options instance
+settings = Options()
 
 
 def display_introduction(name) -> None:
     os.system('clear' if os.name == 'posix' else 'cls')
-    
+
     console.print(f'Great! 👋Hi, {name}!\n\n')
     console.print(
         '🧩 Wordle is a word-guessing game.'
@@ -30,12 +32,7 @@ def display_introduction(name) -> None:
     console.print(
         'Your goal is to guess the word as quickly as possible.\n\n\n')
 
-
-# Create an Options instance
-settings = Options()
-
-# MAIN
-if __name__ == '__main__':
+def display_welcome():
     os.system('clear' if os.name == 'posix' else 'cls')
 
     # welcome banner
@@ -56,6 +53,10 @@ if __name__ == '__main__':
 
     display_introduction(name)
 
+
+
+# MAIN
+def main():
     while True:
         # Prompt the player for the game options
         print(
@@ -120,4 +121,27 @@ if __name__ == '__main__':
                 'Invalid choice. Please type [bold]start[/] or [bold]options[/].')
 
     # === END GAME OPTIONS ====
-    print('end game options')
+    print('\n[bold cyan]GG! 🤝[/bold cyan]\n')
+    print('1. [bold magenta]s[/] - Start a new game')
+    print('2. [bold magenta]o[/] - Go to options menu')
+    print('3. [bold magenta]x[/] - Exit the game')
+
+    end_game_choice = input('\nType a command: ')
+
+    if end_game_choice.lower() == 's':
+        os.system('clear' if os.name == 'posix' else 'cls')
+        print('Starting a new game...\n')
+        main()
+    elif end_game_choice.lower() == 'o':
+        os.system('clear' if os.name == 'posix' else 'cls')
+        settings.display_options()
+    elif end_game_choice.lower() == 'x':
+        print('Thanks for playing Wordle 🫶. Goodbye!\n')
+        sys.exit()
+    else:
+        print('[bold red]Invalid command.[/bold red] '
+            'Please choose a valid option (s, o, or x).\n')
+
+if __name__ == '__main__':
+    display_welcome()
+    main()
