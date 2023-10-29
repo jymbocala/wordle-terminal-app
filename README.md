@@ -1,4 +1,35 @@
-# Wordle by Jym 
+# Wordle Terminal App
+
+Welcome to Wordle Terminal App, a text-based recreation of the popular word-guessing puzzle game. Emulating the spirit of the real [Wordle](https://www.nytimes.com/games/wordle/index.html) game, this terminal-based version challenges players to decipher a hidden five-letter word through a series of educated guesses. Try your linguistic prowess and immerse yourself in the world of word puzzles with Wordle Terminal App.
+
+******
+
+## Features
+
+### 1. Keyboard Display
+
+This feature provides a visual representation of the keyboard layout that helps the player keep track of their guessed letters. The keyboard display makes it easier to manage guesses by showing which letters have already been used and which ones are still available.
+
+<u>Toggle Keyboard:</u> The player can control the visibility of the keyboard display by navigating to the "Options" menu within the game. From there, they can toggle the keyboard on or off, allowing them to customize their gaming experience based on their preferences.
+
+### 2. Customizable Word Length
+
+In the Wordle Terminal App, players have the flexibility to customize the length of the secret Wordle word, allowing them to tailor the game's difficulty to their preferences. By default, Wordle presents players with 5-letter words, mirroring the classic Wordle experience. However, players can choose to increase the challenge by opting for longer words or make it more accessible by selecting shorter ones.
+
+<u>How to Set Word Length:</u> 
+
+- Navigate to the "Options" menu by typing "o" in the Welcome screen or End Game screen.
+- Enter the command "length" followed by the desired number. For example, typing "length4" sets the word length to 4, while "length6" increases it to 6. The minimum word length allowed is 3, and the maximum is 7.
+
+### 3. Post-Win Game Options
+
+In Wordle Terminal App, the excitement doesn't end when the player successfully guesses the secret word. After a triumphant victory, players have the opportunity to make choices for what comes next. They can decide their next step: press "s" to start a new round, "o" to modify settings and game difficulty, or "x" to gracefully end the game. This feature adds replayability and control to the Wordle experience.
+
+<u>Start a New Round (S):</u> If players are eager to dive back into the game and challenge themselves with another word, they can simply press "s" to begin a fresh round of Wordle. They'll receive a new secret word to decipher, and the fun continues.
+
+<u>Modify Game Settings (O):</u> Wordle offers a menu of customizable options. By pressing "o," players can access the "Options" menu, where they have the freedom to tweak game settings, such as adjusting the word length and toggling the keyboard display for added difficulty.
+
+<u>End the Game (X):</u> If it's time to take a break or conclude the Wordle session, players can press "x" to exit the game.
 
 ## Code Style Guide
 
@@ -20,6 +51,7 @@ This code snippet demonstrates several PEP8-compliant practices, including:
 ✅ Line Length: Lines are kept within a reasonable length to ensure readability.
 ✅ Spacing: Proper spacing is used around operators and within comments for clarity.
 
+******
 
 ## Software and Hardware Requirements
 
@@ -30,7 +62,6 @@ This code snippet demonstrates several PEP8-compliant practices, including:
 - **Python 3 or Higher**: Wordle is built using Python, so make sure you have Python 3 or a higher version installed on your system. You can check your Python version by running `python3 --version`. If you don't have Python installed, you can download it from the [official Python website](https://www.python.org/downloads/).
 
 - **pip (Python Package Manager)**: Ensure that pip is available in your Python installation. pip is a package manager for Python and is usually included with Python. You can check if pip is installed by running `pip --version`.
-
 
 ### Hardware Requirements
 
