@@ -89,10 +89,10 @@ class GameRound:  # Handles game state presentation and interaction.
                 formatted_guess_text = " ".join(formatted_guess_text)
                 # Print the styled text with center alignment
                 console.print(formatted_guess_text, justify="center")
-            print(game.guessed_words)
-            print("GAME.GUESSED_WORDS above")
-            #display keyboard
-            self.display_keyboard(game)
+            
+            # Display keyboard if self.settings.display_keyboard is True
+            if self.settings.display_keyboard:
+                self.display_keyboard(game)
 
             # display attempts left
             print(f"\n\nGuesses left: {game.attempts_left}\n\n")

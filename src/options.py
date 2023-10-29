@@ -7,7 +7,10 @@ console = Console(width=65)
 
 class Options:
     def __init__(self):
-        self.word_length = 5  # default word length
+        # Default settings
+        self.word_length = 5
+        self.display_keyboard = True
+
 
     def display_options(self):
         os.system('clear' if os.name == 'posix' else 'cls')
@@ -15,11 +18,13 @@ class Options:
             print('\n[bold cyan]OPTIONS MENU[/bold cyan]\n\n')
             print('Available commands:')
             print('1. [bold magenta]length<number>[/]'
-                  ' - Adjust word length between 3-7 '
-                  'to increase or decrease difficulty, '
-                  'default is set to 5 (e.g., "length4")')
+                ' - Adjust word length between 3-7 '
+                'to increase or decrease difficulty, '
+                'default is set to 5 (e.g., "length4")')
             print(
-                '2. [bold magenta]start[/] or [bold magenta]s[/]'
+            '2. [bold magenta]keyboard[/] - Toggle keyboard display on/off')
+            print(
+                '3. [bold magenta]start[/] or [bold magenta]s[/]'
                 ' - Start the game with updated settings')
 
             choice = input('\nType a command to change the setting: ')
@@ -32,7 +37,7 @@ class Options:
                         self.set_word_length(length)
                         os.system('clear' if os.name == 'posix' else 'cls')
                         print(f'[green4]Word length set to {
-                              length}[/green4].\n')
+                            length}[/green4].\n')
                     else:
                         os.system('clear' if os.name == 'posix' else 'cls')
                         print(
@@ -48,6 +53,11 @@ class Options:
             elif choice.lower() == 'start' or choice.lower() == 's':
                 return True  # Settings were adjusted, start game
 
+            elif choice.lower() == 'keyboard':
+                self.toggle_keyboard_display()
+                os.system('clear' if os.name == 'posix' else 'cls')
+                print(f'Keyboard display toggled: {self.display_keyboard}')
+
             else:
                 print(
                     '[bold red]Invalid command.[/bold red] '
@@ -61,5 +71,5 @@ class Options:
             word_min_length=self.word_length, word_max_length=self.word_length
             ).upper()
 
-    def set_show_keyboard(self, show_keyboard):
-        self.show_keyboard = show_keyboard
+    def toggle_keyboard_display(self):
+        self.display_keyboard = not self.display_keyboard
