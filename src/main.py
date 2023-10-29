@@ -53,7 +53,53 @@ def display_welcome():
 
     display_introduction(name)
 
+def start_game(settings):
+    # Generate wordle_word based on word_length setting
+    wordle_word = settings.generate_wordle_word()
+    print(f'Wordle_word: {wordle_word}')
+    # Create an instance of the GameSession with the word set to wordle_word variable
+    game = wordle.GameSession(wordle_word)
+    game_round = wordle.GameRound(wordle_word, game, settings)
 
+    # === GAME ====
+    print(f'Please type a {
+        settings.word_length}-letter word to make your first guess.')
+
+    # this while loop will run as long as game is not over
+    while not game.is_game_over():
+        # displays progression of the game
+        game_round.display_game_state(game)
+        # user inputs a guess
+        player_guess = game_round.get_player_guess()
+        # give feedback to the user about their guess
+        feedback = game.make_guess(player_guess)
+        print(feedback)
+
+    game_round.display_outcome(game)
+
+def end_game_options(settings):
+    while True:
+        print('\n[bold cyan]GG! 🤝[/bold cyan]\n')
+        print('1. [bold magenta]s[/] - Start a new game')
+        print('2. [bold magenta]o[/] - Go to options menu')
+        print('3. [bold magenta]x[/] - Exit the game')
+
+        end_game_choice = input('\nType a command: ')
+
+        if end_game_choice.lower() == 's':
+            os.system('clear' if os.name == 'posix' else 'cls')
+            print('Starting a new game...\n')
+            start_game(settings)
+        elif end_game_choice.lower() == 'o':
+            os.system('clear' if os.name == 'posix' else 'cls')
+            settings.display_options()
+            start_game(settings)
+        elif end_game_choice.lower() == 'x':
+            print('Thanks for playing Wordle 🫶. Goodbye!\n')
+            sys.exit()
+        else:
+            print('[bold red]Invalid command.[/bold red] '
+                'Please choose a valid option (s, o, or x).\n')
 
 # MAIN
 def main():
@@ -66,81 +112,20 @@ def main():
         if choice == 'O' or choice == 'o':
             # Use the Options class to adjust word length
             settings.display_options()
-            # Generate wordle_word based on word_length setting
-            wordle_word = settings.generate_wordle_word()
-            print(f'Wordle_word: {wordle_word}')
-            # Create an instance of the GameSession with the word set to wordle_word variable
-            game = wordle.GameSession(wordle_word)
-            game_round = wordle.GameRound(wordle_word, game, settings)
-
-            # === GAME ====
-            print(f'Please type a {
-                settings.word_length}-letter word to make your first guess.')
-
-            # this while loop will run as long as game is not over
-            while not game.is_game_over():
-                # displays progression of the game
-                game_round.display_game_state(game)
-                # user inputs a guess
-                player_guess = game_round.get_player_guess()
-                # give feedback to the user about their guess
-                feedback = game.make_guess(player_guess)
-                print(feedback)
-
-            game_round.display_outcome(game)
+            start_game(settings)
             break  # this break will exit the main loop
 
         # If the player hasn't adjusted the settings, allow them to start the game
         elif choice == 'S' or choice == 's':
-            # Generate wordle_word based on word_length setting
-            wordle_word = settings.generate_wordle_word()
-            print(f'Wordle_word: {wordle_word}')
-            # Create an instance of the GameSession with the word set to wordle_word variable
-            game = wordle.GameSession(wordle_word)
-            game_round = wordle.GameRound(wordle_word, game, settings)
-
-            # === GAME ====
-            print(f'Please type a {
-                settings.word_length}-letter word to make your first guess.')
-
-            # this while loop will run as long as game is not over
-            while not game.is_game_over():
-                # displays progression of the game
-                game_round.display_game_state(game)
-                # user inputs a guess
-                player_guess = game_round.get_player_guess()
-                # give feedback to the user about their guess
-                feedback = game.make_guess(player_guess)
-                print(feedback)
-
-            game_round.display_outcome(game)
+            start_game(settings)
             break  # this break will exit the main loop
 
         else:
             print(
                 'Invalid choice. Please type [bold]start[/] or [bold]options[/].')
 
-    # === END GAME OPTIONS ====
-    print('\n[bold cyan]GG! 🤝[/bold cyan]\n')
-    print('1. [bold magenta]s[/] - Start a new game')
-    print('2. [bold magenta]o[/] - Go to options menu')
-    print('3. [bold magenta]x[/] - Exit the game')
+    end_game_options(settings)
 
-    end_game_choice = input('\nType a command: ')
-
-    if end_game_choice.lower() == 's':
-        os.system('clear' if os.name == 'posix' else 'cls')
-        print('Starting a new game...\n')
-        main()
-    elif end_game_choice.lower() == 'o':
-        os.system('clear' if os.name == 'posix' else 'cls')
-        settings.display_options()
-    elif end_game_choice.lower() == 'x':
-        print('Thanks for playing Wordle 🫶. Goodbye!\n')
-        sys.exit()
-    else:
-        print('[bold red]Invalid command.[/bold red] '
-            'Please choose a valid option (s, o, or x).\n')
 
 if __name__ == '__main__':
     display_welcome()
