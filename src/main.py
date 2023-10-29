@@ -7,12 +7,11 @@ import wordle
 from options import Options
 
 console = Console(width=65)
-# Create an Options instance
-settings = Options()
+settings = Options() # Create an Options instance
 
 
 def display_introduction(name) -> None:
-    os.system('clear' if os.name == 'posix' else 'cls')
+    clear_screen()
 
     console.print(f'Great! 👋Hi, {name}!\n\n')
     console.print(
@@ -33,7 +32,7 @@ def display_introduction(name) -> None:
         'Your goal is to guess the word as quickly as possible.\n\n\n')
 
 def display_welcome():
-    os.system('clear' if os.name == 'posix' else 'cls')
+    clear_screen()
 
     # welcome banner
     print('''
@@ -95,11 +94,15 @@ def end_game_options(settings):
             settings.display_options()
             start_game(settings)
         elif end_game_choice.lower() == 'x':
+            clear_screen()
             print('Thanks for playing Wordle 🫶. Goodbye!\n')
             sys.exit()
         else:
             print('[bold red]Invalid command.[/bold red] '
                 'Please choose a valid option (s, o, or x).\n')
+
+def clear_screen():
+    os.system('clear' if os.name == 'posix' else 'cls')
 
 # MAIN
 def main():
