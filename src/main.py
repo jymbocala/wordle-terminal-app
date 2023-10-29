@@ -9,15 +9,15 @@ from options import Options
 console = Console(width=65)
 settings = Options() # Create an Options instance
 
-
+# Display a welcome message and gather the player's name.
 def display_introduction(name) -> None:
     clear_screen()
 
-    console.print(f'Great! 👋Hi, {name}!\n\n')
+    console.print(f'Great! 👋 Hi, {name}!\n\n')
     console.print(
         '🧩 Wordle is a word-guessing game.'
         'Try to guess a secret [bold cyan]five-letter word[/]'
-        ' in [bold magenta]six attempts[/].')
+        ' in [bold magenta]six attempts[/].\n')
     console.print(
         'After each guess, I\'ll provide feedback using color indicators:')
     console.print(
@@ -34,7 +34,7 @@ def display_introduction(name) -> None:
 def display_welcome():
     clear_screen()
 
-    # welcome banner
+    # Welcome banner
     print('''
  _     _  _______  ___      _______  _______  __   __  _______    _______  _______    _     _  _______  ______    ______   ___      _______  __  
 | | _ | ||       ||   |    |       ||       ||  |_|  ||       |  |       ||       |  | | _ | ||       ||    _ |  |      | |   |    |       ||  | 
@@ -64,27 +64,29 @@ def start_game(settings):
     print(f'Please type a {
         settings.word_length}-letter word to make your first guess.')
 
-    # this while loop will run as long as game is not over
+    # This while loop will run as long as game is not over
     while not game.is_game_over():
-        # displays progression of the game
+        # Displays progression of the game
         game_round.display_game_state(game)
-        # user inputs a guess
+        # User inputs a guess
         player_guess = game_round.get_player_guess()
-        # give feedback to the user about their guess
+        # Give feedback to the user about their guess
         feedback = game.make_guess(player_guess)
         print(feedback)
 
     game_round.display_outcome(game)
 
+# Display post-game options menu for starting a new game, adjusting settings, or exiting.
 def end_game_options(settings):
     while True:
-        print('\n[bold cyan]GG! 🤝[/bold cyan]\n')
+        print('[bold cyan]GG! 🤝[/bold cyan]\n')
         print('1. [bold magenta]s[/] - Start a new game')
         print('2. [bold magenta]o[/] - Go to options menu')
         print('3. [bold magenta]x[/] - Exit the game')
 
         end_game_choice = input('\nType a command: ')
 
+        # Execute the chosen action based on user input.
         if end_game_choice.lower() == 's':
             os.system('clear' if os.name == 'posix' else 'cls')
             print('Starting a new game...\n')
@@ -117,12 +119,12 @@ def main():
             # Use the Options class to adjust word length
             settings.display_options()
             start_game(settings)
-            break  # this break will exit the main loop
+            break  # This break will exit the main loop
 
         # If the player hasn't adjusted the settings, allow them to start the game
         elif choice == 'S' or choice == 's':
             start_game(settings)
-            break  # this break will exit the main loop
+            break  # This break will exit the main loop
 
         else:
             print(
@@ -132,5 +134,6 @@ def main():
 
 
 if __name__ == '__main__':
+    # Display the welcome message and initiate the main game loop.
     display_welcome()
     main()

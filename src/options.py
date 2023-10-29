@@ -16,10 +16,11 @@ class Options:
         os.system('clear' if os.name == 'posix' else 'cls')
 
     def display_options(self):
+        # Display the options menu to adjust game settings
         self.clear_screen()
         while True:
-            print('\n[bold cyan]OPTIONS MENU[/bold cyan]\n\n')
-            print('Available commands:')
+            console.rule('[bold cyan]OPTIONS MENU[/bold cyan]')
+            print('\n\nAvailable commands:')
             print('1. [bold magenta]length<number>[/]'
                 ' - Adjust word length between 3-7 '
                 'to increase or decrease difficulty, '
@@ -30,7 +31,7 @@ class Options:
                 '3. [bold magenta]start[/] or [bold magenta]s[/]'
                 ' - Start the game with updated settings')
 
-            choice = input('\nType a command to change the setting: ')
+            choice = input('\n\nType a command to change the setting: ')
 
             if choice.startswith('length'):
                 try:
@@ -57,6 +58,7 @@ class Options:
                 return True  # Settings were adjusted, start game
 
             elif choice.lower() == 'keyboard' or choice.lower() == 'k':
+                # Toggle the keyboard display setting
                 self.toggle_keyboard_display()
                 self.clear_screen()
                 keyboard_status = '[green4]ON[/]' if self.display_keyboard else '[red3]OFF[/]'
@@ -69,12 +71,15 @@ class Options:
                     'Please choose a valid command from the list.')
 
     def set_word_length(self, length):
+        # Set the word length for the game
         self.word_length = length
 
     def generate_wordle_word(self):
+        # Generate a wordle word based on the current word length
         return RandomWord().word(
             word_min_length=self.word_length, word_max_length=self.word_length
             ).upper()
 
     def toggle_keyboard_display(self):
+        # Toggle the keyboard display setting
         self.display_keyboard = not self.display_keyboard

@@ -6,7 +6,7 @@ from options import Options
 dictionary = PyDictionary()
 console = Console(width=65)
 
-# Create an Options instance
+# Create an Options instance to manage game settings.
 settings = Options()
 
 
@@ -22,10 +22,11 @@ class GameSession():  # Manages the game state and logic
         # Clear the console or terminal screen
         os.system('clear' if os.name == 'posix' else 'cls')
 
-        # add player guess to guessed_word list
+        # Add player guess to guessed_word list
         self.guessed_words.append(word_guess)
 
         if word_guess == self.wordle_word:
+            # Return a victory message when the word is correctly guessed
             return """
        __   __  _______  __   __    _     _  _______  __    _  __
       |  | |  ||       ||  | |  |  | | _ | ||       ||  |  | ||  |
@@ -50,20 +51,22 @@ class GameSession():  # Manages the game state and logic
             self.attempts_left -= 1
             return '[center]Incorrect guess. Try again.\n\n[/center]'
 
+    # Check if the game is over (out of attempts or correct guess)
     def is_game_over(self):
-        # if attempts left reaches 0
+        # If attempts left reaches 0
         if self.attempts_left <= 0:
             return True
-        # if player guesses correctly
+        # If player guesses correctly
         if self.wordle_word in self.guessed_words:
             return True
         return False
 
+    # Check if the game is won
     def is_game_won(self):
         return self.wordle_word in self.guessed_words
 
-
-class GameRound:  # Handles game state presentation and interaction.
+# Handles game state presentation and interaction.
+class GameRound:  
     def __init__(self, wordle_word, game_session, settings):
         self.wordle_word = wordle_word
         # Store a reference to the GameSession instance
@@ -76,6 +79,7 @@ class GameRound:  # Handles game state presentation and interaction.
                 formatted_guess_text = []
 
                 for wordle_char, guessed_char in zip(game.wordle_word, guess):
+                    # Generate colored feedback for the player's guesses
                     if guessed_char == wordle_char:
                         formatted_guess_text.append(
                             f"[bold green]{guessed_char}[/]")
@@ -92,20 +96,24 @@ class GameRound:  # Handles game state presentation and interaction.
             
             # Display keyboard if self.settings.display_keyboard is True
             if self.settings.display_keyboard:
+                print()
+                print()
+                print()
+                print()
                 self.display_keyboard(game)
 
-            # display attempts left
-            print(f"\n\nGuesses left: {game.attempts_left}\n\n")
+            # Display attempts left
+            print(f"\n\nGuesses left: {game.attempts_left}")
 
     def get_player_guess(self):
-        player_guess = input(str('\n\nEnter word: ')).upper()
+        player_guess = input(str('\nEnter word: ')).upper()
 
-        # check if the word is the correct length
+        # Check if the word is the correct length
         if len(player_guess) != self.settings.word_length:
             print(f'Please enter a {self.settings.word_length}-letter word!')
             return self.get_player_guess()
 
-        # check if word is in the dictionary
+        # Check if word is in the dictionary
         try:
             is_in_dictionary = bool(dictionary.meaning(player_guess, disable_errors=True))
         except Exception:
@@ -123,6 +131,7 @@ class GameRound:  # Handles game state presentation and interaction.
             formatted_guess_text = []
 
             for wordle_char, guessed_char in zip(self.wordle_word, guess):
+                # Generate colored feedback for the player's guesses
                 if guessed_char == wordle_char:
                     formatted_guess_text.append(
                         f"[bold green]{guessed_char}[/]")
@@ -170,15 +179,15 @@ class GameRound:  # Handles game state presentation and interaction.
         # Determine if the game is won using the is_game_won
         is_win = self.game_session.is_game_won()
 
-        # Check if it's a win or a loss
+        # Check if it's a win or a loss and display outcome message
         if is_win:
             print('\n\nCongratulations! '
                 f'You correctly guessed the word: [bold magenta]{
-                    self.wordle_word}[/]!\n\n\n\n')
+                    self.wordle_word}[/]!\n\n\n')
         else:
             print('\n\nOh no! You\'ve run out of guesses. '
                 f'The word was [bold magenta]{
                     self.wordle_word}[/]!\n\n\n\n')
-            
+
     def clear_screen(self):
         os.system('clear' if os.name == 'posix' else 'cls')
