@@ -63,10 +63,9 @@ class GameSession():  # Manages the game state and logic
         return self.wordle_word in self.guessed_words
 
 
-class GameRound:  # Handles displaying information and taking input from user.
+class GameRound:  # Handles game state presentation and interaction.
     def __init__(self, wordle_word, game_session, settings):
         self.wordle_word = wordle_word
-        self.guesses = []
         # Store a reference to the GameSession instance
         self.game_session = game_session
         self.settings = settings
@@ -90,11 +89,16 @@ class GameRound:  # Handles displaying information and taking input from user.
                 formatted_guess_text = " ".join(formatted_guess_text)
                 # Print the styled text with center alignment
                 console.print(formatted_guess_text, justify="center")
+            print(game.guessed_words)
+            print("GAME.GUESSED_WORDS above")
+            #display keyboard
+            self.display_keyboard(game)
+
             # display attempts left
-            print(f"Guesses left: {game.attempts_left}")
+            print(f"\n\nGuesses left: {game.attempts_left}\n\n")
 
     def get_player_guess(self):
-        player_guess = input(str('Enter word: ')).upper()
+        player_guess = input(str('\n\nEnter word: ')).upper()
 
         # check if the word is the correct length
         if len(player_guess) != self.settings.word_length:
@@ -104,8 +108,8 @@ class GameRound:  # Handles displaying information and taking input from user.
         # check if word is in the dictionary
         is_in_dictionary = bool(dictionary.meaning(player_guess))
         if not is_in_dictionary:
-            print(f'Could not find the word "{
-                  player_guess}" in the dictionary. Try again.')
+            print(f'Could not find the word {player_guess} '
+            'in the dictionary. Try again.')
             return self.get_player_guess()
         else:
             return player_guess
@@ -131,6 +135,30 @@ class GameRound:  # Handles displaying information and taking input from user.
             # Print the styled text with center alignment
             console.print(formatted_guess_text, justify="center")
 
+    def display_keyboard(self, game):
+        # Define the keyboard layout as a list of rows
+        keyboard_layout = [
+            'Q W E R T Y U I O P',
+            ' A S D F G H J K L ',
+            '   Z X C V B N M   '
+        ]
+
+        # Create a set of used letters from all guessed words
+        used_letters = set()
+        for guessed_word in game.guessed_words:
+            used_letters.update(guessed_word)
+
+        # Loop through each row and print it with the appropriate color
+        for row in keyboard_layout:
+            for letter in row:
+                if letter.strip() in used_letters:
+                    # If the letter is used in any guessed word, print it in "red3"
+                    print(f'[dim]{letter}[/dim]', end="  ")
+                else:
+                    # If the letter is not used in any guessed word, print it in the default color
+                    print(letter, end="  ")
+            print()  # Move to the next line after printing a row
+
     def display_outcome(self, game):
         # Display all 6 guesses to the user
         self.display_guesses(game.guessed_words)
@@ -141,9 +169,9 @@ class GameRound:  # Handles displaying information and taking input from user.
         # Check if it's a win or a loss
         if is_win:
             print('\n\nCongratulations! '
-                  f'You correctly guessed the word: [bold magenta]{
-                      self.wordle_word}[/]!\n\n\n\n')
+                f'You correctly guessed the word: [bold magenta]{
+                    self.wordle_word}[/]!\n\n\n\n')
         else:
             print('\n\nOh no! You\'ve run out of guesses. '
-                  f'The word was [bold magenta]{
-                      self.wordle_word}[/]!\n\n\n\n')
+                f'The word was [bold magenta]{
+                    self.wordle_word}[/]!\n\n\n\n')

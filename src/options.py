@@ -60,3 +60,6 @@ class Options:
         return RandomWord().word(
             word_min_length=self.word_length, word_max_length=self.word_length
             ).upper()
+
+    def set_show_keyboard(self, show_keyboard):
+        self.show_keyboard = show_keyboard

@@ -10,6 +10,8 @@ console = Console(width=65)
 
 
 def display_introduction(name) -> None:
+    os.system('clear' if os.name == 'posix' else 'cls')
+    
     console.print(f'Great! 👋Hi, {name}!\n\n')
     console.print(
         '🧩 Wordle is a word-guessing game.'
