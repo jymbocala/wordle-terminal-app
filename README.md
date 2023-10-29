@@ -129,7 +129,8 @@ Have fun playing Wordle!
 ******
 
 ##  Implementation Plan
-For the development of this Wordle project, I used the GitHub Projects. This tool allowed me to do the following::
+[Public GitHub Project](https://github.com/users/jymbocala/projects/1/views/1)
+For the development of this Wordle project, I used the GitHub Projects. This tool allowed me to do the following:
 
 Task Prioritization: GitHub Projects helped prioritize tasks, ensuring that critical elements received immediate attention.
 
