@@ -189,14 +189,24 @@ wonderwords==2.2.0
 ******
 
 ## References:
-Download python (2023) Python.org. Available at: https://www.python.org/downloads/ (Accessed: 23 October 2023). 
+Download python (2023) Python.org. Available at: https://www.python.org/downloads/ (Accessed: 23 October 2023).
+
 Geekpradd (2021) Error: The following error occured: List index out of Range · issue #35 · geekpradd/Pydictionary, GitHub. Available at: https://github.com/geekpradd/PyDictionary/issues/35 (Accessed: 29 October 2023). 
-March, J. (2023) Enthought python minimum hardware requirements, Enthought. Available at: https://support.enthought.com/hc/en-us/articles/204273874-Enthought-Python-Minimum-Hardware-Requirements (Accessed: 28 October 2023). 
+
+March, J. (2023) Enthought python minimum hardware requirements, Enthought. Available at: https://support.enthought.com/hc/en-us/articles/204273874-Enthought-Python-Minimum-Hardware-Requirements (Accessed: 28 October 2023).
+
 McGugan, W. (2023) Rich, PyPI. Available at: https://pypi.org/project/rich/ (Accessed: 29 October 2023). 
+
 Nyingi, J. (2019) Setting up pep8 and Pylint on vs code, DEV Community. Available at: https://dev.to/j0nimost/setting-up-pep8-and-pylint-on-vs-code-34h (Accessed: 29 October 2023). 
+
 Py-dictionary (2021) PyPI. Available at: https://pypi.org/project/Py-Dictionary/ (Accessed: 25 October 2023). 
+
 Real Python (2023) How to write beautiful python code with PEP 8, Real Python. Available at: https://realpython.com/python-pep8/#maximum-line-length-and-line-breaking (Accessed: 29 October 2023). 
+
 Rebguns, M. (2021) Wonderwords, PyPI. Available at: https://pypi.org/project/wonderwords/ (Accessed: 25 October 2023). 
+
 Rocholl, J.C. (2023) Pycodestyle, PyPI. Available at: https://pypi.org/project/pycodestyle/ (Accessed: 24 October 2023). 
+
 van Rossum, G., Warsaw, B. and Coghlan, A. (2023) Python enhancement proposals, PEP 8 – Style Guide for Python Code. Available at: https://peps.python.org/pep-0008/ (Accessed: 29 October 2023). 
+
 Wordle - a daily word game (no date) The New York Times. Available at: https://www.nytimes.com/games/wordle/index.html (Accessed: 29 October 2023). 
