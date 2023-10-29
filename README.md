@@ -128,6 +128,34 @@ Have fun playing Wordle!
 
 ******
 
+##  Implementation Plan
+For the development of this Wordle project, I used the GitHub Projects. This tool allowed me to do the following::
+
+Task Prioritization: GitHub Projects helped prioritize tasks, ensuring that critical elements received immediate attention.
+
+Structured To-Do Lists: I organized project boards with detailed task cards, creating comprehensive to-do lists.
+
+Progress Tracking: By regularly updating task cards with comments and status changes, I effectively monitored progress, ensuring transparency in what was completed and what remained.
+
+**Features TODO Lists** 
+![Keyboard TODO list](./docs/keyboard_todo.png)
+![Options/ Length modicfication TODO list](./docs/modify_length_todo.png)
+![Post Game Screen TODO list](./docs/post-game_todo.png)
+
+**An error task** 
+![Error task](./docs/error_task.png)
+
+**Oct 24 Kanban** 
+![Oct 24 Kanban](./docs/oct-24.png)
+
+**Oct 26 Kanban** 
+![Oct 26 Kanban](./docs/oct-26.png)
+
+**Oct 27 Kanban** 
+![Oct 26 Kanban](./docs/oct-27.png)
+
+******
+
 ## Required Dependencies:
 ```
 astroid==3.0.1
@@ -158,4 +186,17 @@ urllib3==2.0.7
 wonderwords==2.2.0
 ```
 
+******
+
 ## References:
+Download python (2023) Python.org. Available at: https://www.python.org/downloads/ (Accessed: 23 October 2023). 
+Geekpradd (2021) Error: The following error occured: List index out of Range · issue #35 · geekpradd/Pydictionary, GitHub. Available at: https://github.com/geekpradd/PyDictionary/issues/35 (Accessed: 29 October 2023). 
+March, J. (2023) Enthought python minimum hardware requirements, Enthought. Available at: https://support.enthought.com/hc/en-us/articles/204273874-Enthought-Python-Minimum-Hardware-Requirements (Accessed: 28 October 2023). 
+McGugan, W. (2023) Rich, PyPI. Available at: https://pypi.org/project/rich/ (Accessed: 29 October 2023). 
+Nyingi, J. (2019) Setting up pep8 and Pylint on vs code, DEV Community. Available at: https://dev.to/j0nimost/setting-up-pep8-and-pylint-on-vs-code-34h (Accessed: 29 October 2023). 
+Py-dictionary (2021) PyPI. Available at: https://pypi.org/project/Py-Dictionary/ (Accessed: 25 October 2023). 
+Real Python (2023) How to write beautiful python code with PEP 8, Real Python. Available at: https://realpython.com/python-pep8/#maximum-line-length-and-line-breaking (Accessed: 29 October 2023). 
+Rebguns, M. (2021) Wonderwords, PyPI. Available at: https://pypi.org/project/wonderwords/ (Accessed: 25 October 2023). 
+Rocholl, J.C. (2023) Pycodestyle, PyPI. Available at: https://pypi.org/project/pycodestyle/ (Accessed: 24 October 2023). 
+van Rossum, G., Warsaw, B. and Coghlan, A. (2023) Python enhancement proposals, PEP 8 – Style Guide for Python Code. Available at: https://peps.python.org/pep-0008/ (Accessed: 29 October 2023). 
+Wordle - a daily word game (no date) The New York Times. Available at: https://www.nytimes.com/games/wordle/index.html (Accessed: 29 October 2023). 
